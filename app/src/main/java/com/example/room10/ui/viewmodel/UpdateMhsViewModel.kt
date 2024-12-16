@@ -49,7 +49,7 @@ class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
         return errorState.isValid()
     }
 
-    fun updateData() {
+    fun updateData() { // Untuk memperbarui data mahasiswa dan menampilkan pesan
         val currentEvent = updateUiState.mahasiswaEvent
         if (validateFields()) {
             viewModelScope.launch {
