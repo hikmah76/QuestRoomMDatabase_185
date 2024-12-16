@@ -10,7 +10,7 @@ import com.example.room10.KrsApp
 
 object PenyediaViewModel {
 
-    val Factory = viewModelFactory {
+    val Factory = viewModelFactory { // Membuat Factory menginisialisasi ViewModel
         initializer {
             MahasiswaViewModel(
                 krsApp().containerApp.repositoryMhs
