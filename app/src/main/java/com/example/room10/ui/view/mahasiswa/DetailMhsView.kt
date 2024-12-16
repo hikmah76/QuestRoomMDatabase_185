@@ -70,7 +70,7 @@ fun DetailMhsView( //Menampilkan tampilan detail mahasiswa
                 )
             }
         }
-    ) { innerPadding ->
+    ) { innerPadding -> //Menggunakan padding untuk UI
         val detailUiState by viewModel.detailUiState.collectAsState()
         BodyDetailMhs(
             modifier = Modifier.padding(innerPadding),
