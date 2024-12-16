@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class UpdateMhsViewModel (
+class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
     savedStateHandle: SavedStateHandle,
     private val repositoryMhs: RepositoryMhs
 ) : ViewModel() {
