@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class DetailMhsViewModel (
+class DetailMhsViewModel ( // Untuk mengambil, menampilkan, dan menghapus detail mahasiswa
     savedStateHandle: SavedStateHandle,
     private val repositoryMhs: RepositoryMhs,
 ) : ViewModel() {
