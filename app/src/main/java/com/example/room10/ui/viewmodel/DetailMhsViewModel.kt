@@ -60,7 +60,7 @@ class DetailMhsViewModel ( // Untuk mengambil, menampilkan, dan menghapus detail
     }
 }
 
-data class DetailUiState(
+data class DetailUiState( //Menampilkan detail mahasiswa berdasarkan NIM
     val detailUiEvent: MahasiswaEvent = MahasiswaEvent(),
     val isLoading: Boolean = false,
     val isError: Boolean = false,
