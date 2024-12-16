@@ -9,7 +9,7 @@ import com.example.room10.data.entity.Mahasiswa
 import com.example.room10.repository.RepositoryMhs
 import kotlinx.coroutines.launch
 
-class MahasiswaViewModel (private val repositoryMhs: RepositoryMhs) : ViewModel() {
+class MahasiswaViewModel (private val repositoryMhs: RepositoryMhs) : ViewModel() { // Untuk validasi dan menyimpan data mahasiswa
     var uiState by mutableStateOf(MhsUiState())
 
     //Memperbarui state berdasarkan input pengguna
