@@ -36,7 +36,7 @@ class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
         )
     }
 
-    fun validateFields(): Boolean {
+    fun validateFields(): Boolean { //Validasi form, untuk memastikan semua field terisi dengan benar
         val event = updateUiState.mahasiswaEvent
         val errorState = FormErrorState(
             nim = if (event.nim.isNotEmpty()) null else "Nim tidak boleh kosong",
