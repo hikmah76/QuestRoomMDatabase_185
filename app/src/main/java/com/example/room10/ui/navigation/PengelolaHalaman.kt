@@ -9,11 +9,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.room10.ui.view.mahasiswa.DestinasiInsert
-import com.example.room10.ui.view.mahasiswa.DetailMhsView
-import com.example.room10.ui.view.mahasiswa.HomeMhsView
-import com.example.room10.ui.view.mahasiswa.InsertMhsView
-import com.example.room10.ui.view.mahasiswa.UpdateMhsView
+
+import com.example.roomlocaldb1.ui.view.mahasiswa.DestinasiInsert
+import com.example.roomlocaldb1.ui.view.mahasiswa.DetailMhsView
+import com.example.roomlocaldb1.ui.view.mahasiswa.HomeMhsView
+import com.example.roomlocaldb1.ui.view.mahasiswa.InsertMhsView
+import com.example.roomlocaldb1.ui.view.mahasiswa.UpdateMhsView
 
 @Composable
 fun PengelolaHalaman(
@@ -52,7 +53,7 @@ fun PengelolaHalaman(
         }
 
         composable(
-            route = DestinasiDetail.routeWithArgs,
+            DestinasiDetail.routesWithArg,
             arguments = listOf(
                 navArgument(DestinasiDetail.NIM) {
                     type = NavType.StringType
@@ -60,7 +61,7 @@ fun PengelolaHalaman(
             )
         ) {
             val nim = it.arguments?.getString(DestinasiDetail.NIM)
-            nim?.let {nim ->
+            nim.let {nim ->
                 DetailMhsView(
                     onBack = {
                         navController.popBackStack()
@@ -77,7 +78,7 @@ fun PengelolaHalaman(
             }
         }
         composable(
-            DestinasiUpdate.routeWithArgs,
+            DestinasiUpdate.routesWithArg,
             arguments = listOf(
                 navArgument(DestinasiUpdate.NIM) {
                     type = NavType.StringType
@@ -91,7 +92,7 @@ fun PengelolaHalaman(
                 onNavigate = {
                     navController.popBackStack()
                 },
-                modifier = modifier,
+                modifier = modifier
             )
         }
     }

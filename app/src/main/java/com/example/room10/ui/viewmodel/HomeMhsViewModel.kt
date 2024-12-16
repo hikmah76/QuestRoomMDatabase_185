@@ -1,4 +1,4 @@
-package com.example.room10.ui.viewmodel
+package com.example.roomlocaldb1.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
-class HomeMhsViewModel ( // Mengelola dan mengubah state data mahasiswa.
+class HomeMhsViewModel (  // Mengelola dan mengubah state data mahasiswa.
     private val repositoryMhs: RepositoryMhs
 ) : ViewModel() {
     val homeUiState: StateFlow<HomeUiState> = repositoryMhs.getAllMhs()
@@ -39,8 +39,7 @@ class HomeMhsViewModel ( // Mengelola dan mengubah state data mahasiswa.
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeUiState(isLoading = true,
-            )
+            initialValue = HomeUiState(isLoading = true,)
         )
 }
 

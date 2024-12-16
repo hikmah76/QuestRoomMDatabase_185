@@ -1,4 +1,5 @@
-package com.example.room10.ui.view.mahasiswa
+package com.example.roomlocaldb1.ui.view.mahasiswa
+
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,31 +13,29 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
-
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
 import com.example.room10.ui.customwidget.CustomTopAppBar
 import com.example.room10.ui.navigation.AlamatNavigasi
-import com.example.room10.ui.viewmodel.FormErrorState
-import com.example.room10.ui.viewmodel.MahasiswaEvent
-import com.example.room10.ui.viewmodel.MahasiswaViewModel
-import com.example.room10.ui.viewmodel.MhsUiState
 import com.example.room10.ui.viewmodel.PenyediaViewModel
 
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.FormErrorState
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.MahasiswaEvent
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.MhsUIState
 import kotlinx.coroutines.launch
 
 
@@ -102,10 +101,9 @@ fun InsertMhsView(
 fun InsertBodyMhs(
     modifier: Modifier = Modifier,
     onValueChange: (MahasiswaEvent) -> Unit,
-    uiState: MhsUiState,
-    onClick: () -> Unit,
-
-    ) {
+    uiState: MhsUIState,
+    onClick: () -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
@@ -133,13 +131,12 @@ fun FormMahasiswa(
     onValueChange: (MahasiswaEvent) -> Unit,
     errorState: FormErrorState = FormErrorState(),
     modifier: Modifier = Modifier
-
 ) {
     val jenisKelamin = listOf("Laki-laki", "Perempuan")
     val kelas = listOf("A", "B", "C", "D", "E")
 
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         // Nama
         OutlinedTextField(
@@ -211,17 +208,17 @@ fun FormMahasiswa(
         Text(text = "Kelas")
         Row {
             kelas.forEach {kelas ->
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Start
-                ) {
-                    RadioButton(
-                        selected = mahasiswaEvent.kelas == kelas,
-                        onClick = { onValueChange(mahasiswaEvent.copy(kelas = kelas)) },
-                    )
-                    Text(text = kelas)
-                }
-            }}
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            RadioButton(
+                selected = mahasiswaEvent.kelas == kelas,
+                onClick = { onValueChange(mahasiswaEvent.copy(kelas = kelas)) },
+            )
+            Text(text = kelas,)
+        }
+        }}
         Text(
             text = errorState.kelas ?: "",
             color = Color.Red
@@ -243,3 +240,4 @@ fun FormMahasiswa(
         )
     }
 }
+

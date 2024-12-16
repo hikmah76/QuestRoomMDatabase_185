@@ -1,4 +1,4 @@
-package com.example.room10.ui.view.mahasiswa
+package com.example.roomlocaldb1.ui.view.mahasiswa
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,18 +14,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
 import com.example.room10.ui.customwidget.CustomTopAppBar
 import com.example.room10.ui.viewmodel.PenyediaViewModel
-import com.example.room10.ui.viewmodel.UpdateMhsViewModel
 
+import com.example.roomlocaldb1.ui.viewmodel.UpdateMhsViewModel
+
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @Composable
-fun UpdateMhsView( //Untuk mengedit data mahasiswa
+fun UpdateMhsView(       //Untuk mengedit data mahasiswa
     onBack: () -> Unit,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
@@ -35,7 +36,7 @@ fun UpdateMhsView( //Untuk mengedit data mahasiswa
     val snackbarHostState = remember { SnackbarHostState() } // Snackbar state
     val coroutineScope = rememberCoroutineScope()
 
-    // Observasi perubahan snackarMessage
+
     LaunchedEffect(uiState.snackBarMessage) {
         println("LaunchedEffect triggered")
         uiState.snackBarMessage?.let { message ->
@@ -48,8 +49,8 @@ fun UpdateMhsView( //Untuk mengedit data mahasiswa
                 )
                 viewModel.resetSnackBarMessage()
             }
-        }
     }
+}
     Scaffold (
         modifier = modifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }, // Tempatkan Snackbar di Scaffold
@@ -57,7 +58,7 @@ fun UpdateMhsView( //Untuk mengedit data mahasiswa
             CustomTopAppBar(
                 judul = "Edit Mahasiswa",
                 showBackButton = true,
-                onBack = onBack,
+                onBack = onBack
             )
         }
     ) { padding ->
@@ -67,7 +68,7 @@ fun UpdateMhsView( //Untuk mengedit data mahasiswa
                 .padding(padding)
                 .padding(16.dp)
         ) {
-            // Isi Body
+
             InsertBodyMhs(
                 uiState = uiState,
                 onValueChange = {updateEvent ->
@@ -77,13 +78,13 @@ fun UpdateMhsView( //Untuk mengedit data mahasiswa
                     coroutineScope.launch {
                         if (viewModel.validateFields()) {
                             viewModel.updateData()
-                            delay(600)
-                            withContext(Dispatchers.Main) {
-                                onNavigate() // Navigasi di main thread
-                            }
+                        delay(600)
+                        withContext(Dispatchers.Main) {
+                            onNavigate()
                         }
                     }
                 }
+    }
             )
         }
     }

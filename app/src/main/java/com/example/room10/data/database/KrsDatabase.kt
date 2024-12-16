@@ -7,16 +7,19 @@ import androidx.room.RoomDatabase
 import com.example.room10.data.dao.MahasiswaDao
 import com.example.room10.data.entity.Mahasiswa
 
-@Database(entities = [Mahasiswa::class], version = 1, exportSchema = false)
-abstract class KrsDatabase : RoomDatabase(){
+//Mendefinisikan database dengan tabel Mahasiswa
 
-    //Mendefinisikan fungsi untuk mengakses data mahasiswa
+@Database(entities = [Mahasiswa::class], version = 1, exportSchema = false)
+abstract class KrsDatabase : RoomDatabase() {
+
+    //Mendefinisikan fungsi untuk mengakses data Mahasiswa
     abstract fun mahasiswaDao(): MahasiswaDao
 
-    companion object{
-        @Volatile //Memastikan bahswa nilai variable instance selalu samadi
+    companion object {
+        @Volatile //Memastikan bahwa nilai variabel Instance selalu sama di
         private var Instance: KrsDatabase? = null
 
+        // template
         fun getDatabase(context: Context): KrsDatabase {
             return (Instance ?: synchronized(this) {
                 Room.databaseBuilder(

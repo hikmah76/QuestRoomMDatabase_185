@@ -1,12 +1,13 @@
-package com.example.room10.ui.viewmodel
+package com.example.roomlocaldb1.ui.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.room10.data.entity.Mahasiswa
 import com.example.room10.repository.RepositoryMhs
-import com.example.room10.ui.navigation.DestinasiDetail
+import com.example.room10.ui.navigation.DestinasiUpdate
 
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.MahasiswaEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -17,18 +18,19 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+
 class DetailMhsViewModel ( // Untuk mengambil, menampilkan, dan menghapus detail mahasiswa
     savedStateHandle: SavedStateHandle,
     private val repositoryMhs: RepositoryMhs,
 ) : ViewModel() {
-    private val _nim: String = checkNotNull(savedStateHandle[DestinasiDetail.NIM])
+    private val _nim: String = checkNotNull(savedStateHandle[DestinasiUpdate.NIM])
 
     val detailUiState: StateFlow<DetailUiState> = repositoryMhs.getMhs(_nim)
         .filterNotNull()
         .map {
             DetailUiState(
                 detailUiEvent = it.toDetailUiEvent(),
-                isLoading = false ,
+                isLoading = false,
             )
         }
         .onStart {
@@ -41,7 +43,7 @@ class DetailMhsViewModel ( // Untuk mengambil, menampilkan, dan menghapus detail
                     isLoading = false,
                     isError = true,
                     errorMessage = it.message ?: "Terjadi kesalahan",
-                ))
+                    ))
         }
         .stateIn(
             scope = viewModelScope,
@@ -60,28 +62,36 @@ class DetailMhsViewModel ( // Untuk mengambil, menampilkan, dan menghapus detail
     }
 }
 
-data class DetailUiState( //Menampilkan detail mahasiswa berdasarkan NIM
-    val detailUiEvent: MahasiswaEvent = MahasiswaEvent(),
+data class DetailUiState(
+    val detailUiEvent: MahasiswaEvent = MahasiswaEvent(), //Menampilkan detail mahasiswa berdasarkan NIM
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val errorMessage: String = ""
-) {
+    ) {
     val isUiEventEmpty: Boolean
         get() = detailUiEvent == MahasiswaEvent()
+
     val isUiEventNotEmpty: Boolean
         get() = detailUiEvent != MahasiswaEvent()
-
 }
-
 
 
 fun Mahasiswa.toDetailUiEvent() : MahasiswaEvent {
-    return MahasiswaEvent (
-        nim = nim,
-        nama = nama,
-        jenisKelamin = jenisKelamin,
-        alamat = alamat,
-        kelas = kelas,
-        angkatan = angkatan
-    )
+        return MahasiswaEvent (
+            nim = nim,
+            nama = nama,
+            jenisKelamin = jenisKelamin,
+            alamat = alamat,
+            kelas = kelas,
+            angkatan = angkatan
+        )
 }
+
+fun MahasiswaEvent.toMahasiswaEntity(): Mahasiswa = Mahasiswa (
+    nim = nim,
+    nama = nama,
+    jenisKelamin = jenisKelamin,
+    alamat = alamat,
+    kelas = kelas,
+    angkatan = angkatan
+)

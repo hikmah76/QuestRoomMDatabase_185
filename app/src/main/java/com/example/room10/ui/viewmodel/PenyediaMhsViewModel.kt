@@ -7,10 +7,14 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.lifecycle.viewmodel.initializer
 import com.example.room10.KrsApp
 
+import com.example.roomlocaldb1.ui.viewmodel.DetailMhsViewModel
+import com.example.roomlocaldb1.ui.viewmodel.HomeMhsViewModel
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel
+import com.example.roomlocaldb1.ui.viewmodel.UpdateMhsViewModel
 
 object PenyediaViewModel {
 
-    val Factory = viewModelFactory { // Membuat Factory menginisialisasi ViewModel
+    val Factory = viewModelFactory {
         initializer {
             MahasiswaViewModel(
                 krsApp().containerApp.repositoryMhs

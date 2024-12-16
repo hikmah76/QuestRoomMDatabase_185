@@ -1,4 +1,4 @@
-package com.example.room10.ui.viewmodel
+package com.example.roomlocaldb1.ui.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,15 +9,19 @@ import androidx.lifecycle.viewModelScope
 import com.example.room10.data.entity.Mahasiswa
 import com.example.room10.repository.RepositoryMhs
 import com.example.room10.ui.navigation.DestinasiUpdate
+
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.MhsUIState
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.MahasiswaEvent
+import com.example.roomlocaldb1.ui.viewmodel.MahasiswaViewModel.FormErrorState
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
+class UpdateMhsViewModel (
     savedStateHandle: SavedStateHandle,
     private val repositoryMhs: RepositoryMhs
 ) : ViewModel() {
-    var updateUiState by mutableStateOf(MhsUiState())
+    var updateUiState by mutableStateOf(MhsUIState())
         private set
     private val _nim: String = checkNotNull(savedStateHandle[DestinasiUpdate.NIM])
 
@@ -39,7 +43,7 @@ class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
     fun validateFields(): Boolean { //Validasi form, untuk memastikan semua field terisi dengan benar
         val event = updateUiState.mahasiswaEvent
         val errorState = FormErrorState(
-            nim = if (event.nim.isNotEmpty()) null else "Nim tidak boleh kosong",
+            nim = if (event.nim.isNotEmpty()) null else "NIM tidak boleh kosong",
             nama = if (event.nama.isNotEmpty()) null else "Nama tidak boleh kosong",
             jenisKelamin = if (event.jenisKelamin.isNotEmpty()) null else "Jenis Kelamin tidak boleh kosong",
             alamat = if (event.alamat.isNotEmpty()) null else "Alamat tidak boleh kosong",
@@ -76,6 +80,6 @@ class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
     }
 }
 
-fun Mahasiswa.toUIStateMhs(): MhsUiState = MhsUiState (
+fun Mahasiswa.toUIStateMhs(): MhsUIState = MhsUIState (
     mahasiswaEvent = this.toDetailUiEvent(),
 )
