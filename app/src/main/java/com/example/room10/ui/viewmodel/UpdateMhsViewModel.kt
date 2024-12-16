@@ -30,7 +30,7 @@ class UpdateMhsViewModel ( // Untuk mengambil dan memperbarui data mahasiswa
         }
     }
 
-    fun updateState(mahasiswaEvent: MahasiswaEvent) {
+    fun updateState(mahasiswaEvent: MahasiswaEvent) { //Memperbarui status UI
         updateUiState = updateUiState.copy(
             mahasiswaEvent = mahasiswaEvent,
         )
