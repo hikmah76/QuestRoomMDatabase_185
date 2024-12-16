@@ -44,7 +44,7 @@ import com.example.room10.ui.viewmodel.HomeUiState
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeMhsView (
+fun HomeMhsView ( //Menampilkan UI Daftar Mahasiswa dengan fitur tambah dan detail mahasiswa
     viewModel: HomeMhsViewModel = viewModel (factory = PenyediaViewModel.Factory),
     onAddMhs: () -> Unit = { },
     onDetailClick: (String) -> Unit = { },
