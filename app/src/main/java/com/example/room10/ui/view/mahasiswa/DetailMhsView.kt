@@ -40,7 +40,7 @@ import com.example.room10.ui.viewmodel.PenyediaViewModel
 import com.example.room10.ui.viewmodel.toMahasiswaEntity
 
 @Composable
-fun DetailMhsView(
+fun DetailMhsView( //Menampilkan tampilan detail mahasiswa
     modifier: Modifier = Modifier,
     viewModel: DetailMhsViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onBack: () -> Unit = { },
