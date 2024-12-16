@@ -199,7 +199,7 @@ fun ComponentDetailMhs(
 }
 
 @Composable
-private fun DeleteConfirmationDialog(
+private fun DeleteConfirmationDialog( //Untuk menampilkan dialog konfirmasi penghapusan data.
     onDeleteConfirm: () -> Unit,
     onDeleteCancel: () -> Unit,
     modifier: Modifier = Modifier
